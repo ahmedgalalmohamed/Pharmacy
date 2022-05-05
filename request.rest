@@ -1,0 +1,10 @@
+POST http://localhost:3000/adminauth/token
+Content-Type: application/json
+
+{
+"username":"ahmed"
+}
+
+###
+
+POST http://localhost:3000/adminauth/post
