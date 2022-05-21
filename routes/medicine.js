@@ -1,16 +1,17 @@
 const express = require('express');
+const verify  = require('../config/verify');
 const router = express.Router();
 const con = require('../config/connectionmysql');
 
 //#region post get medicine as user
-router.get('/', (req, res) => {
+router.get('/', verify,(req, res) => {
     let sql = `select * from medicine`;
     con.executeQuery(req, res, sql);
 });
 //#endregion
 
 //#region post add medicine as admin
-router.post('/', (req, res) => {
+router.post('/', verify,(req, res) => {
     let Name = req.body.Name;
     let Description = req.body.Description;
     let sql = `INSERT INTO medicine (name,description) Values ('${Name}','${Description}')`;
@@ -20,7 +21,7 @@ router.post('/', (req, res) => {
 //#endregion
 
 
-router.put('/', (req, res) => {
+router.put('/', verify,(req, res) => {
     let Name = req.body.name;
     let Description = req.body.description;
     let Id = req.body.id;

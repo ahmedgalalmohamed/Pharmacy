@@ -1,6 +1,5 @@
 const catchError = require('http-errors');
 require('dotenv').config();
-const Joi = require('joi'); // validation 
 const cors = require('cors');//to allow all clients to connected it
 const express = require('express');
 const logger = require('morgan');
@@ -63,7 +62,7 @@ app.use('/userauth', userRouter);
 
 
 app.use((req, res, next) => {
-    next(catchError(404).message);
+    res.status(404).json({msgError: catchError(404).message});
 });
 
 const port = process.env.PORT || 3000;

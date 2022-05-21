@@ -1,6 +1,6 @@
 //#region connection to database
 function connectDatabase() {
-    const mysql = require('mysql')
+    const mysql = require('mysql');
     /*connection to database*/
     const con = mysql.createConnection({
         host: 'localhost',
