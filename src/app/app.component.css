@@ -1,0 +1,43 @@
+.example-spacer {
+  flex: 1;
+}
+
+.active-link {
+  background-color: #962071;
+}
+
+img {
+  width: 5%;
+  height: 100%;
+}
+
+
+input {
+  height: 100%;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
+}
+
+.error {
+  color: red;
+  font-size: 10px;
+}
+
+a {
+  color: white;
+}
+
+a:hover {
+  background-color: #a337bb;
+  transform: translate(-10px, 5px);
+}
+
+.toolbar {
+  background-color: #702283;
+  color: white;
+}
+.btn:hover{
+  background-color: #a337bb;
+  color: white;
+}

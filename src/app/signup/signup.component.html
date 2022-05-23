@@ -1,0 +1,35 @@
+<div class="container">
+  <form @fadeInUpBig class="example-form" [formGroup]="checkValidity">
+    <h1>Sign Up</h1>
+    <mat-form-field appearance="outline" class="example-full-width" hideRequiredMarker>
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" type="email" autocomplete="off">
+      <mat-icon matPrefix>email</mat-icon>
+      <mat-error *ngIf="!checkValidity.get('email')!.valid&&checkValidity.get('email')!.touched">
+        <span *ngIf="checkValidity.get('email')!.hasError('required')">** this is required **</span>
+        <span *ngIf="checkValidity.get('email')!.hasError('maxlength')">** this is maxLength 90 **</span>
+        <span *ngIf="checkValidity.get('email')!.hasError('email')">** this is not valid email **</span>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="example-full-width" hideRequiredMarker>
+      <mat-label>Password</mat-label>
+      <input matInput #inputPass formControlName="pass" type="password" autocomplete="off">
+      <mat-icon matPrefix>lock</mat-icon>
+      <span (click)="togglePass(inputPass)" class="material-icons icon-toggle" matSuffix>{{toggleIcon}}</span>
+      <mat-error *ngIf="!checkValidity.get('pass')!.valid&&checkValidity.get('pass')!.touched">
+        <span *ngIf="checkValidity.get('pass')!.hasError('required')">** this is required **</span>
+        <span *ngIf="checkValidity.get('pass')!.hasError('maxlength')">** at most  90 **</span>
+        <span *ngIf="checkValidity.get('pass')!.hasError('minlength')">** at least 8 **</span>
+      </mat-error>
+    </mat-form-field>
+    <button mat-raised-button
+            [disabled]="!checkValidity.valid"
+            (click)="signupUser(checkValidity.get('email')!.value,checkValidity.get('pass')!.value)">
+      Sign Up
+    </button>
+    <button mat-raised-button
+            (click)="login()">
+      Login
+    </button>
+  </form>
+</div>

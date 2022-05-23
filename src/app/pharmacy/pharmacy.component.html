@@ -1,0 +1,71 @@
+<mat-tab-group mat-stretch-tabs mat-align-tabs="start">
+  <mat-tab *ngIf="getLength()" label="Display Pharmacies">
+    <mat-form-field class="example-search" appearance="outline" floatLabel="never">
+      <mat-label>Search by Name</mat-label>
+      <input matInput type="text" (keyup)="filter($event.target)">
+      <mat-icon matPrefix>search</mat-icon>
+    </mat-form-field>
+    <div class="container">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
+        <!-- id Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell [hidden]="true" *matHeaderCellDef> Id</th>
+          <td mat-cell [hidden]="true" *matCellDef="let element"> {{element.Id}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Name</th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+
+        <!-- location Column -->
+        <ng-container matColumnDef="location">
+          <th mat-header-cell *matHeaderCellDef> Location</th>
+          <td mat-cell *matCellDef="let element"> {{element.location}} </td>
+        </ng-container>
+
+        <!-- delete Column -->
+        <ng-container *ngIf="Ack.isAdmin()" matColumnDef="delete">
+          <th mat-header-cell *matHeaderCellDef> Delete</th>
+          <td mat-cell *matCellDef="let element" onclick='event.stopPropagation();return false;'>
+            <button mat-mini-fab color="warn" (click)="delPharmacy(element.Id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row (click)="getRow(row)" *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+  </mat-tab>
+  <mat-tab *ngIf="Ack.isAdmin()" label="Add Pharmacy">
+    <div class="container">
+      <form class="example-form" [formGroup]="validationCheck">
+        <mat-form-field appearance="outline" class="example-full-width" hideRequiredMarker>
+          <mat-label>Name</mat-label>
+          <input matInput formControlName="name" type="text" autocomplete="off">
+          <mat-error *ngIf="!validationCheck.get('name')!.valid&&validationCheck.get('name')!.touched">
+            <span *ngIf="validationCheck.get('name')!.hasError('required')">** this is required **</span>
+            <span *ngIf="validationCheck.get('name')!.hasError('maxlength')">** this is maxLength 90 **</span>
+            <span *ngIf="validationCheck.get('name')!.hasError('minlength')">** at least 5 **</span>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="example-full-width" hideRequiredMarker>
+          <mat-label>Location</mat-label>
+          <textarea matInput formControlName="location" type="text" autocomplete="off"></textarea>
+          <mat-error *ngIf="!validationCheck.get('location')!.valid&&validationCheck.get('location')!.touched">
+            <span *ngIf="validationCheck.get('location')!.hasError('required')">** this is required **</span>
+            <span *ngIf="validationCheck.get('location')!.hasError('minlength')">** at least 20 **</span>
+          </mat-error>
+        </mat-form-field>
+        <button mat-raised-button class="btn"
+                [disabled]="!validationCheck.valid"
+                (click)="addPharmacy(validationCheck.get('name')!.value,validationCheck.get('location')!.value)">
+          Add Pharmacy
+        </button>
+      </form>
+    </div>
+  </mat-tab>
+</mat-tab-group>

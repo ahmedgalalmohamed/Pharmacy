@@ -1,0 +1,31 @@
+.demo-table {
+  width: 50%;
+  margin: 10px;
+  padding: 10px;
+  height: 100%;
+}
+
+.mat-column-delete {
+  padding: 10px;
+}
+
+.example-search {
+  width: 98%;
+  margin: 5px;
+}
+
+tr.mat-row:hover {
+  background-color: whitesmoke;
+  cursor: pointer;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  width: 100%;
+}
+
+
+

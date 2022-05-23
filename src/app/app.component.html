@@ -1,0 +1,60 @@
+<mat-toolbar class="toolbar"  *ngIf="funServices.isAuthenticated()">
+  <img src="{{image}}" alt="..."/>
+  <span @fadeIn class="title">Pharmacy</span>
+  <span class="example-spacer"></span>
+  <a mat-button routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}" [routerLink]="['']">
+    <mat-icon>home</mat-icon>
+    <span>Home</span>
+  </a>
+  <a mat-button routerLinkActive="active-link" [routerLink]="['/pharmacy']">
+    <mat-icon>local_pharmacy</mat-icon>
+    <span>Pharmacy</span>
+  </a>
+  <a mat-button routerLinkActive="active-link" [routerLink]="['/medicine']">
+    <mat-icon>medication</mat-icon>
+    <span>Medicines</span>
+  </a>
+  <button class="btn" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button class="btn" mat-menu-item *ngIf="funServices.isAuthenticated()" (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      <span>Logout</span>
+    </button>
+    <button class="btn" mat-menu-item *ngIf="!funServices.isAuthenticated()" [routerLink]="['/signup']">
+      <mat-icon>person_add_alt_1</mat-icon>
+      <span>Sing up</span>
+    </button>
+    <button class="btn" mat-menu-item *ngIf="!funServices.isAuthenticated()" [routerLink]="['/loginuser']">
+      <mat-icon>login</mat-icon>
+      <span>Sing in</span>
+    </button>
+    <button class="btn" mat-menu-item *ngIf="funServices.isAuthenticated()" [routerLink]="['/profile']">
+      <mat-icon>portrait</mat-icon>
+      <span>Profile</span>
+    </button>
+    <button class="btn" mat-menu-item  *ngIf="funServices.isAdmin()" [routerLink]="['/allusers']">
+      <mat-icon>people</mat-icon>
+      <span>AllUsers</span>
+    </button>
+  </mat-menu>
+</mat-toolbar>
+
+<mat-toolbar class="toolbar" *ngIf="!funServices.isAuthenticated()&&checkUrl()">
+  <img src="{{image}}" alt="..."/>
+  <span @fadeIn class="title">Pharmacy</span>
+  <span class="example-spacer"></span>
+  <form class="example-form" [formGroup]="checkValidity">
+    <label for="email">Email</label>
+    <input formControlName="email" type="email" placeholder="Enter Email" id="email" required>
+    <label for="password">Password</label>
+    <input formControlName="pass" type="password" placeholder="Enter Password" id="password" required>
+    <button class="btn" type="submit" [disabled]="!checkValidity.valid"
+            (click)="login(checkValidity.get('email')!.value,checkValidity.get('pass')!.value)" mat-raised-button>Login
+    </button>
+    <button mat-raised-button  class="btn" style="margin-left: 10px" [routerLink]="['/signup']">Sign Up</button>
+  </form>
+</mat-toolbar>
+
+<router-outlet></router-outlet>

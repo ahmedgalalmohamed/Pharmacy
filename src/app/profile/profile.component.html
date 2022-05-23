@@ -1,0 +1,58 @@
+<!--<div class="div-icon">-->
+<!--  <span class="material-icons blue-color">account_circle</span>-->
+<!--  <div>-->
+<!--  <h1>-->
+<!--    Ahmed-->
+<!--  </h1>-->
+<!--  <span>Ahmed.12@yahoo.com</span>-->
+<!--  </div>-->
+<!--</div>-->
+<mat-accordion class="example-headers-align">
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Change Password
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <form class="example-form" autocomplete="off" [formGroup]="checkValidity">
+      <mat-form-field autocomplete="off" appearance="outline" class="example-full-width" hideRequiredMarker>
+        <mat-label>Old Password</mat-label>
+        <input matInput #inputOldPass formControlName="oldPass" type="password" autocomplete="off">
+        <mat-icon matPrefix>lock</mat-icon>
+        <span (click)="toggleOldPass(inputOldPass)" class="material-icons icon-toggle" matSuffix>{{toggleIconOld}}</span>
+        <mat-error *ngIf="!checkValidity.get('oldPass')!.valid&&checkValidity.get('oldPass')!.touched">
+          <span *ngIf="checkValidity.get('oldPass')!.hasError('required')">** this is required **</span>
+          <span *ngIf="checkValidity.get('oldPass')!.hasError('maxlength')">** this is maxLength 90 **</span>
+          <span *ngIf="checkValidity.get('oldPass')!.hasError('minlength')">** at least 8 **</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="example-full-width" hideRequiredMarker>
+        <mat-label>New Password</mat-label>
+        <input matInput #inputNewPass formControlName="newPass" type="password" autocomplete="off">
+        <mat-icon matPrefix>lock</mat-icon>
+        <span (click)="toggleNewPass(inputNewPass)" class="material-icons icon-toggle" matSuffix>{{toggleIconNew}}</span>
+        <mat-error *ngIf="!checkValidity.get('newPass')!.valid&&checkValidity.get('newPass')!.touched">
+          <span *ngIf="checkValidity.get('newPass')!.hasError('required')">** this is required **</span>
+          <span *ngIf="checkValidity.get('newPass')!.hasError('maxlength')">** this is maxLength 90 **</span>
+          <span *ngIf="checkValidity.get('newPass')!.hasError('minlength')">** at least 8 **</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="example-full-width" hideRequiredMarker>
+        <mat-label>Confirm Password</mat-label>
+        <input matInput  #inputConfirmPass formControlName="confirmPass" type="password" autocomplete="off">
+        <mat-icon matPrefix>lock</mat-icon>
+        <span (click)="toggleConfirmPass(inputConfirmPass)" class="material-icons icon-toggle" matSuffix>{{toggleIconConfirm}}</span>
+        <mat-error *ngIf="!checkValidity.get('confirmPass')!.valid&&checkValidity.get('confirmPass')!.touched">
+          <span *ngIf="checkValidity.get('confirmPass')!.hasError('required')">** this is required **</span>
+          <span *ngIf="checkValidity.get('confirmPass')!.hasError('maxlength')">** this is maxLength 90 **</span>
+          <span *ngIf="checkValidity.get('confirmPass')!.hasError('minlength')">** at least 8 **</span>
+        </mat-error>
+      </mat-form-field>
+      <button mat-raised-button color="primary"
+              [disabled]="!checkValidity.valid"
+              (click)="changePass(checkValidity.get('oldPass')!.value,checkValidity.get('newPass')!.value,checkValidity.get('confirmPass')!.value)">
+        Change Password
+      </button>
+    </form>
+  </mat-expansion-panel>
+</mat-accordion>

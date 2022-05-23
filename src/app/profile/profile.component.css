@@ -1,0 +1,23 @@
+.example-form {
+  padding: 20px;
+  width:25%;
+  background-color:#fff;
+  border-radius: 15px;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+button {
+  width: 100%;
+  margin-top: 10px;
+  background-color: #702283 !important;
+  color: white;
+}
+.icon-toggle {
+  cursor: pointer;
+  color: #702283;
+}
+
+

@@ -1,0 +1,33 @@
+<h1 mat-dialog-title>Edit Medicine</h1>
+<mat-dialog-content>
+  <form class="example-form" [formGroup]="validationCheck">
+    <mat-form-field appearance="outline" class="example-full-width" hideRequiredMarker>
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name"  type="text" autocomplete="off">
+      <mat-error *ngIf="!validationCheck.get('name')!.valid&&validationCheck.get('name')!.touched">
+        <span *ngIf="validationCheck.get('name')!.hasError('required')">** this is required **</span>
+        <span *ngIf="validationCheck.get('name')!.hasError('maxlength')">** this is maxLength 90 **</span>
+        <span *ngIf="validationCheck.get('name')!.hasError('minlength')">** at least 5 **</span>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="example-full-width" hideRequiredMarker>
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description" type="text" autocomplete="off"></textarea>
+      <mat-error *ngIf="!validationCheck.get('description')!.valid&&validationCheck.get('description')!.touched">
+        <span *ngIf="validationCheck.get('description')!.hasError('required')">** this is required **</span>
+        <span *ngIf="validationCheck.get('description')!.hasError('minlength')">** at least 20 **</span>
+      </mat-error>
+    </mat-form-field>
+    <button mat-raised-button
+            class="btn"
+            [disabled]="!validationCheck.valid"
+            mat-dialog-close
+            mat-dialog-close="{{validationCheck.get('name')!.value}};{{validationCheck.get('description')!.value}}"
+    >
+      Add Medicine
+    </button>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+
+</mat-dialog-actions>
